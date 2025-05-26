@@ -1,0 +1,819 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRICK SOLUTION | Event & Talent Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2a2d64;
+            --secondary: #e94560;
+            --light: #f9f9f9;
+            --dark: #1a1a2e;
+            --accent: #ffbe0b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--dark) 0%, #302b63 50%, var(--primary) 100%);
+            color: var(--light);
+            line-height: 1.6;
+        }
+        
+        /* Particle background effect */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            25% {
+                transform: translateY(-20px) translateX(10px);
+            }
+            50% {
+                transform: translateY(0) translateX(20px);
+            }
+            75% {
+                transform: translateY(20px) translateX(10px);
+            }
+        }
+        
+        header {
+            background-color: rgba(26, 26, 46, 0.9);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light);
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn {
+            background-color: var(--secondary);
+            color: var(--light);
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background-color: #d83152;
+            transform: translateY(-2px);
+        }
+        
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--secondary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--secondary);
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background-color: rgba(26, 26, 46, 0.7);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .showcase {
+            background-color: rgba(26, 26, 46, 0.5);
+        }
+        
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .showcase-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            height: 250px;
+        }
+        
+        .showcase-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .showcase-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(42, 45, 100, 0.3), rgba(26, 26, 46, 0.9));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .showcase-item:hover .showcase-overlay {
+            opacity: 1;
+        }
+        
+        .showcase-item:hover .showcase-img {
+            transform: scale(1.1);
+        }
+        
+        .showcase-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .testimonials {
+            text-align: center;
+        }
+        
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .testimonial {
+            background-color: rgba(26, 26, 46, 0.7);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        .contact {
+            background-color: rgba(26, 26, 46, 0.5);
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-details {
+            list-style: none;
+        }
+        
+        .contact-details li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-icon {
+            margin-right: 1rem;
+            color: var(--secondary);
+            font-size: 1.2rem;
+            width: 30px;
+            text-align: center;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: none;
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            font-size: 1rem;
+        }
+        
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links li {
+            margin: 0 1rem;
+        }
+        
+        .footer-links a {
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .social-icons li {
+            margin: 0 0.5rem;
+        }
+        
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--light);
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 2rem;
+        }
+        
+        /* Celebrity Cards */
+        .celebrity-card {
+            background-color: rgba(26, 26, 46, 0.7);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .celebrity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .celebrity-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .celebrity-info {
+            padding: 1.5rem;
+        }
+        
+        .celebrity-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle Background -->
+    <div class="particles" id="particles">
+        <!-- Particles will be added via JavaScript -->
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">BRICK<span>SOLUTION</span></div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#events">Events</a></li>
+                    <li><a href="#celebrities">Celebrities</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <a href="#contact" class="btn">Get Started</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content animate">
+                <h1>Elevate Your Brand with BRICK SOLUTION</h1>
+                <p>Premier event management, talent placement, celebrity partnerships, and brand promotion services to take your business to the next level.</p>
+                <div class="hero-btns">
+                    <a href="#services" class="btn">Our Services</a>
+                    <a href="#contact" class="btn btn-outline">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>Comprehensive solutions for all your brand and event needs</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card animate">
+                    <div class="service-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <h3>Event Management</h3>
+                    <p>End-to-end event planning and execution that creates memorable experiences for your audience.</p>
+                </div>
+                <div class="service-card animate">
+                    <div class="service-icon"><i class="fas fa-star"></i></div>
+                    <h3>Celebrity Management</h3>
+                    <p>Connect with top celebrities and influencers to elevate your brand's visibility and appeal.</p>
+                </div>
+                <div class="service-card animate">
+                    <div class="service-icon"><i class="fas fa-bullseye"></i></div>
+                    <h3>Talent Placement</h3>
+                    <p>Find the perfect talent for your events, campaigns, and promotional activities.</p>
+                </div>
+                <div class="service-card animate">
+                    <div class="service-icon"><i class="fas fa-bullhorn"></i></div>
+                    <h3>Brand Promotion</h3>
+                    <p>Strategic brand promotion campaigns that maximize visibility and return on investment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Showcase Section -->
+    <section class="showcase" id="events">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Event Portfolio</h2>
+                <p>A glimpse of our successful events and collaborations</p>
+            </div>
+            <div class="showcase-grid">
+                <div class="showcase-item animate">
+                    <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Corporate Event" class="showcase-img">
+                    <div class="showcase-overlay">
+                        <h3>Corporate Galas</h3>
+                        <p>Elegant corporate events for leading brands</p>
+                    </div>
+                </div>
+                <div class="showcase-item animate">
+                    <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Music Concert" class="showcase-img">
+                    <div class="showcase-overlay">
+                        <h3>Music Festivals</h3>
+                        <p>Unforgettable music experiences</p>
+                    </div>
+                </div>
+                <div class="showcase-item animate">
+                    <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Product Launch" class="showcase-img">
+                    <div class="showcase-overlay">
+                        <h3>Product Launches</h3>
+                        <p>Spectacular product unveilings</p>
+                    </div>
+                </div>
+                <div class="showcase-item animate">
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Celebrity Event" class="showcase-img">
+                    <div class="showcase-overlay">
+                        <h3>Celebrity Meet & Greets</h3>
+                        <p>Exclusive fan engagement events</p>
+                    </div>
+                </div>
+                <div class="showcase-item animate">
+                    <img src="https://images.unsplash.com/photo-1551818255-e6e10975bc17?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Brand Activation" class="showcase-img">
+                    <div class="showcase-overlay">
+                        <h3>Brand Activations</h3>
+                        <p>Interactive brand experiences</p>
+                    </div>
+                </div>
+                <div class="showcase-item animate">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Award Show" class="showcase-img">
+                    <div class="showcase-overlay">
+                        <h3>Award Shows</h3>
+                        <p>Prestigious recognition ceremonies</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Celebrity Section -->
+    <section id="celebrities">
+        <div class="container">
+            <div class="section-title">
+                <h2>Celebrity Network</h2>
+                <p>We work with top celebrities across industries</p>
+            </div>
+            <div class="services-grid">
+                <div class="celebrity-card animate">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Entertainment" class="celebrity-img">
+                    <div class="celebrity-info">
+                        <h3>Entertainment</h3>
+                        <p>Film stars, musicians, and performers to bring star power to your events.</p>
+                    </div>
+                </div>
+                <div class="celebrity-card animate">
+                    <img src="https://images.unsplash.com/photo-1543351611-58f69d7c1781?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Sports" class="celebrity-img">
+                    <div class="celebrity-info">
+                        <h3>Sports</h3>
+                        <p>Athletes and sports personalities to energize your brand campaigns.</p>
+                    </div>
+                </div>
+                <div class="celebrity-card animate">
+                    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Digital" class="celebrity-img">
+                    <div class="celebrity-info">
+                        <h3>Digital Influencers</h3>
+                        <p>Social media stars and content creators to reach digital audiences.</p>
+                    </div>
+                </div>
+                <div class="celebrity-card animate">
+                    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Lifestyle" class="celebrity-img">
+                    <div class="celebrity-info">
+                        <h3>Lifestyle & Fashion</h3>
+                        <p>Fashion icons and lifestyle influencers to elevate your brand's image.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Client Testimonials</h2>
+                <p>What our clients say about our services</p>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial animate">
+                    <p class="testimonial-content">"BRICK SOLUTION transformed our product launch into an unforgettable event. Their celebrity partnerships brought incredible visibility to our brand, and the event management was flawless."</p> 
+                    <p class="testimonial-author">- Sarah Johnson, Marketing Director at TechInnovate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+                <p>Ready to elevate your brand? Contact us today</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info animate">
+                    <h3>Contact Information</h3>
+                    <ul class="contact-details">
+                        <li>
+                            <span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span>
+                            <span>Gomti Nagar, Lucknow, Uttar Pradesh</span>
+                        </li>
+                        <li>
+                            <span class="contact-icon"><i class="fas fa-phone"></i></span>
+                            <span>+91 6306578057</span>
+                        </li>
+                        <li>
+                            <span class="contact-icon"><i class="fas fa-envelope"></i></span>
+                            <span>hemantpandey99@gmail.com</span>
+                        </li>
+                        <li>
+                            <span class="contact-icon"><i class="fas fa-clock"></i></span>
+                            <span>Mon-Sat: 9:00 AM - 5:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="contact-form animate">
+                    <form>
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <input type="text" placeholder="Subject">
+                        <textarea placeholder="Your Message" required></textarea>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#celebrities">Celebrities</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+            </ul>
+            <ul class="social-icons">
+                <li><a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#" class="social-icon"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a></li>
+                <li><a href="#" class="social-icon"><i class="fab fa-instagram"></i></a></li>
+            </ul>
+            <p class="copyright">© 2025 BRICK SOLUTION. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Create particle background
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            const colors = ['#e9456033', '#2a2d6433', '#ffbe0b33'];
+            
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random position
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                
+                // Random size
+                const size = Math.random() * 100 + 50;
+                
+                // Random color
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Random animation delay
+                const delay = Math.random() * 5;
+                
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.backgroundColor = color;
+                particle.style.animationDelay = `${delay}s`;
+                
+                particles.appendChild(particle);
+            }
+        }
+        
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            elements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(element);
+            });
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            animateOnScroll();
+        });
+    </script>
+</body>
+</html>
